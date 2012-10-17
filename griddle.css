@@ -1,0 +1,782 @@
+h1, h2, h3 {
+	text-align: center;
+	line-height:; 1.5em;
+	font-family: 'Vollkorn',serif;
+	font-weight: 400;
+}
+
+
+//GRID.CSS
+
+/*
+    960 Grid System ~ Core CSS.
+	Learn more ~ http://960.gs/
+
+	Licensed under GPL and MIT.
+*/
+
+/* =Containers
+--------------------------------------------------------------------------------*/
+
+.container_12,
+.container_16
+{
+	width: 100%;
+}
+
+/* =Grid >> Global
+--------------------------------------------------------------------------------*/
+
+.grid_1,
+.grid_2,
+.grid_3,
+.grid_4,
+.grid_5,
+.grid_6,
+.grid_7,
+.grid_8,
+.grid_9,
+.grid_10,
+.grid_11,
+.grid_12,
+.grid_13,
+.grid_14,
+.grid_15,
+.grid_16
+{
+	display: inline;
+	float: left;
+	margin-left: 1%;
+	margin-right: 1%;
+	*margin-left: 0.9%;
+	*margin-right: 0.9%;
+}
+
+.container_12 .grid_3,
+.container_16 .grid_4
+{
+	width: 23%;
+}
+
+.container_12 .grid_6,
+.container_16 .grid_8
+{
+	width: 48%;
+}
+
+.container_12 .grid_9,
+.container_16 .grid_12
+{
+	width: 73%;
+}
+
+.container_12 .grid_12,
+.container_16 .grid_16
+{
+	width: 98%;
+}
+
+/* =Grid >> Children (Alpha ~ First, Omega ~ Last)
+--------------------------------------------------------------------------------*/
+
+.alpha
+{
+	clear: left;
+}
+
+.omega
+{
+	clear: right;
+}
+
+/* =Grid >> 12 Columns
+--------------------------------------------------------------------------------*/
+
+.container_12 .grid_1
+{
+	width: 6.333%;
+}
+
+.container_12 .grid_2
+{
+	width: 14.666%;
+}
+
+.container_12 .grid_4
+{
+	width: 31.333%;
+}
+
+.container_12 .grid_5
+{
+	width: 39.666%;
+}
+
+.container_12 .grid_7
+{
+	width: 56.333%;
+}
+
+.container_12 .grid_8
+{
+	width: 64.666%;
+}
+
+.container_12 .grid_10
+{
+	width: 81.333%;
+}
+
+.container_12 .grid_11
+{
+	width: 89.666%;
+}
+
+/* =Grid >> 16 Columns
+--------------------------------------------------------------------------------*/
+
+.container_16 .grid_1
+{
+	width: 4.25%;
+}
+
+.container_16 .grid_2
+{
+	width: 10.5%;
+}
+
+.container_16 .grid_3
+{
+	width: 16.75%;
+}
+
+.container_16 .grid_5
+{
+	width: 29.25%;
+}
+
+.container_16 .grid_6
+{
+	width: 35.5%;
+}
+
+.container_16 .grid_7
+{
+	width: 41.75%;
+}
+
+.container_16 .grid_9
+{
+	width: 54.25%;
+}
+
+.container_16 .grid_10
+{
+	width: 60.5%;
+}
+
+.container_16 .grid_11
+{
+	width: 66.75%;
+}
+
+.container_16 .grid_13
+{
+	width: 79.25%;
+}
+
+.container_16 .grid_14
+{
+	width: 85.5%;
+}
+
+.container_16 .grid_15
+{
+	width: 91.75%;
+}
+
+/* =Prefix Extra Space >> Global
+--------------------------------------------------------------------------------*/
+
+.container_12 .prefix_3,
+.container_16 .prefix_4
+{
+	padding-left: 25%;
+}
+
+.container_12 .prefix_6,
+.container_16 .prefix_8
+{
+	padding-left: 50%;
+}
+
+.container_12 .prefix_9,
+.container_16 .prefix_12
+{
+	padding-left: 75%;
+}
+
+/* =Prefix Extra Space >> 12 Columns
+--------------------------------------------------------------------------------*/
+
+.container_12 .prefix_1
+{
+	padding-left: 8.333%;
+}
+
+.container_12 .prefix_2
+{
+	padding-left: 16.666%;
+}
+
+.container_12 .prefix_4
+{
+	padding-left: 33.333%;
+}
+
+.container_12 .prefix_5
+{
+	padding-left: 41.666%;
+}
+
+.container_12 .prefix_7
+{
+	padding-left: 58.333%;
+}
+
+.container_12 .prefix_8
+{
+	padding-left: 66.666%;
+}
+
+.container_12 .prefix_10
+{
+	padding-left: 83.333%;
+}
+
+.container_12 .prefix_11
+{
+	padding-left: 91.666%;
+}
+
+/* =Prefix Extra Space >> 16 Columns
+--------------------------------------------------------------------------------*/
+
+.container_16 .prefix_1
+{
+	padding-left: 6.25%;
+}
+
+.container_16 .prefix_2
+{
+	padding-left: 12.5%;
+}
+
+.container_16 .prefix_3
+{
+	padding-left: 18.75%;
+}
+
+.container_16 .prefix_5
+{
+	padding-left: 31.25%;
+}
+
+.container_16 .prefix_6
+{
+	padding-left: 37.5%;
+}
+
+.container_16 .prefix_7
+{
+	padding-left: 43.75%;
+}
+
+.container_16 .prefix_9
+{
+	padding-left: 56.25%;
+}
+
+.container_16 .prefix_10
+{
+	padding-left: 62.5%;
+}
+
+.container_16 .prefix_11
+{
+	padding-left: 68.75%;
+}
+
+.container_16 .prefix_13
+{
+	padding-left: 81.25%;
+}
+
+.container_16 .prefix_14
+{
+	padding-left: 87.5%;
+}
+
+.container_16 .prefix_15
+{
+	padding-left: 93.75%;
+}
+
+/* =Suffix Extra Space >> Global
+--------------------------------------------------------------------------------*/
+
+.container_12 .suffix_3,
+.container_16 .suffix_4
+{
+	padding-right: 25%;
+}
+
+.container_12 .suffix_6,
+.container_16 .suffix_8
+{
+	padding-right: 50%;
+}
+
+.container_12 .suffix_9,
+.container_16 .suffix_12
+{
+	padding-right: 75%;
+}
+
+/* =Suffix Extra Space >> 12 Columns
+--------------------------------------------------------------------------------*/
+
+.container_12 .suffix_1
+{
+	padding-right: 8.333%;
+}
+
+.container_12 .suffix_2
+{
+	padding-right: 16.666%;
+}
+
+.container_12 .suffix_4
+{
+	padding-right: 33.333%;
+}
+
+.container_12 .suffix_5
+{
+	padding-right: 41.666%;
+}
+
+.container_12 .suffix_7
+{
+	padding-right: 58.333%;
+}
+
+.container_12 .suffix_8
+{
+	padding-right: 66.666%;
+}
+
+.container_12 .suffix_10
+{
+	padding-right: 83.333%;
+}
+
+.container_12 .suffix_11
+{
+	padding-right: 91.666%;
+}
+
+/* =Suffix Extra Space >> 16 Columns
+--------------------------------------------------------------------------------*/
+
+.container_16 .suffix_1
+{
+	padding-right: 6.25%;
+}
+
+.container_16 .suffix_2
+{
+	padding-right: 16.5%;
+}
+
+.container_16 .suffix_3
+{
+	padding-right: 18.75%;
+}
+
+.container_16 .suffix_5
+{
+	padding-right: 31.25%;
+}
+
+.container_16 .suffix_6
+{
+	padding-right: 37.5%;
+}
+
+.container_16 .suffix_7
+{
+	padding-right: 43.75%;
+}
+
+.container_16 .suffix_9
+{
+	padding-right: 56.25%;
+}
+
+.container_16 .suffix_10
+{
+	padding-right: 62.5%;
+}
+
+.container_16 .suffix_11
+{
+	padding-right: 68.75%;
+}
+
+.container_16 .suffix_13
+{
+	padding-right: 81.25%;
+}
+
+.container_16 .suffix_14
+{
+	padding-right: 87.5%;
+}
+
+.container_16 .suffix_15
+{
+	padding-right: 93.75%;
+}
+
+/* =Clear Floated Elements
+--------------------------------------------------------------------------------*/
+
+/* http://sonspring.com/journal/clearing-floats */
+
+html body * span.clear,
+html body * div.clear,
+html body * li.clear,
+html body * dd.clear
+{
+	background: none;
+	border: 0;
+	clear: both;
+	display: block;
+	float: none;
+	font-size: 0;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+	visibility: hidden;
+	width: 0;
+	height: 0;
+}
+
+
+.clearfix:before, .clearfix:after { content: ""; display: table; }
+.clearfix:after { clear: both; }
+.clearfix { zoom: 1; }
+
+.ui-icon-triangle-1-s
+{
+    background-position: -32px -16px;
+}
+.ui-widget
+{
+    max-height: 250px;
+    overflow-y: auto; /* prevent horizontal scrollbar */
+    overflow-x: hidden; /* add padding to account for vertical scrollbar */
+    padding-right: 20px;
+}
+.griddle {
+	position: relative;
+}
+
+.fieldGroup {
+	float: left;
+	margin-right: .625em;
+}
+
+.fieldGroup label 
+{
+    display: block;
+    margin-top: 10px;
+}
+
+.griddleTopControls #ciAutoComplete {
+	width: 20em;
+}
+
+.griddleTopControls input, .griddleTopControls select, .griddleTopControls textarea 
+{
+    padding: 0.5em 0.25em;
+}
+
+.griddleTopControls .CISelect, .griddleTopControls .addCI {
+	margin-top: 0em;
+}
+
+.griddleTopControls .CISelect img, .griddleTopControls .addCI img {
+	position: relative;
+	top: 2px;
+	margin-right: .15em;
+}
+
+.griddleTopControls .addRegion, .griddleBottomControls .addRow {
+	float: right;
+}
+.passiveGrid, .activeGrid, .passGrid
+{
+    position: absolute;
+    left: 0;
+    height: 100%;
+  	width: 100%;
+}
+.passGrid
+{
+    position:relative;
+}
+.passiveGrid div
+{
+    background: #f5f5f5;
+    height: 100%;
+    box-sizing: border-box;
+    border-radius: 3px;
+}
+.passGrid .grid_12
+{
+    height: 55px;
+    border-top: 1px dashed #ccc;
+	border-left: 1px solid #ccc;
+	border-right: 1px solid #ccc;
+    box-sizing: border-box;
+}
+.passGrid .grid_12:first-child
+{
+    border-top: 1px solid #ccc;
+}
+.passGrid .grid_12:last-child {
+	border-bottom: 1px solid #ccc;
+}
+.activeGrid .moveable
+{
+    height: 55px;
+    width: 23%;
+    margin-left: 1%;
+    margin-right: 1%;
+    text-align: center;
+	line-height: 55px;
+    overflow: hidden;
+    box-sizing: border-box;
+    position: relative;
+    background: #d0e5e7;
+    z-index: 1;
+    
+	-webkit-box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.15);
+	-moz-box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.15);
+	box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.15);
+}
+.activeGrid .contentregion
+{
+    height: 55px;
+    width: 48%;
+    /*margin-left: 1%; */
+    margin-right: 1%;
+    box-sizing: border-box;
+    position: relative;
+    background: #abbfeb;
+
+	-webkit-box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.15);
+	-moz-box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.15);
+	box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.15);
+}
+.contentregion .moveable 
+{
+    margin-left: auto 0;
+    margin-right: auto 0;
+    margin-bottom: 1%;
+
+	-webkit-box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.35);
+	-moz-box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.35);
+	box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.35);
+}
+.activeGrid .moveable:after
+{
+    content: '';
+    width: 14px;
+    height: 14px;
+    background: url(https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.17/themes/base/images/ui-icons_222222_256x240.png) -80px -224px no-repeat;
+    display: block;
+    position: absolute;
+    right: 2px;
+    bottom: 2px;
+}
+
+.sizeRef
+{
+    width: 23%;
+    box-sizing: border-box;
+    display: none;
+}
+.ui-autocomplete {
+    cursor: default;
+    position: absolute;
+    z-index: 10 !important;
+}
+
+.button {
+	display: inline-block;
+	padding: 0 15px;
+	margin: 10px 10px 0 0;
+	text-align: center;
+	text-shadow: 0 1px 1px rgba(255, 255, 255, 0.75);
+	vertical-align: middle;
+	cursor: pointer;
+	line-height: 30px;
+	
+	background-color: #f0f0f0;
+	background-image: -moz-linear-gradient(top, #fff, #E6E6E6);
+	background-image: -ms-linear-gradient(top, #fff, #E6E6E6);
+	background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#fff), to(#E6E6E6));
+	background-image: -webkit-linear-gradient(top, #fff, #E6E6E6);
+	background-image: -o-linear-gradient(top, #fff, #E6E6E6);
+	background-image: linear-gradient(top, #fff, #E6E6E6);
+	background-repeat: repeat-x;
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#e6e6e6', GradientType=0);
+	filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);
+	
+	border-color: #E6E6E6 #E6E6E6 #BFBFBF;
+	border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+	border: 1px solid #CCC;
+	border-bottom-color: #BBB;
+	
+	-webkit-border-radius: 15px;
+	-moz-border-radius: 15px;
+	border-radius: 15px;
+	
+	-webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+	-moz-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+	box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.button:hover {
+	text-decoration: none;
+	background-position: 0 -15px;
+	
+	-webkit-transition: background-position 0.1s linear;
+	-moz-transition: background-position 0.1s linear;
+	-ms-transition: background-position 0.1s linear;
+	-o-transition: background-position 0.1s linear;
+	transition: background-position 0.1s linear;
+}
+
+.button:focus {
+	outline: thin dotted #333;
+	outline: 5px auto -webkit-focus-ring-color;
+	outline-offset: -2px;
+}
+
+.action, .caution, .proceed {
+	color: #fff;
+	text-shadow: -1px -1px 1px rgba(0, 0, 0, 0.35);
+	
+	-webkit-box-shadow:	0 4px 2px -2px rgba(0, 0, 0, 0.2), 
+						inset 0 25px 20px -10px rgba(255, 255, 255, 0.3), 
+						inset 0 -15px 20px -10px rgba(0, 0, 0, 0.15);
+						
+	-moz-box-shadow: 	0 4px 2px -2px rgba(0, 0, 0, 0.2), 
+						inset 0 25px 20px -10px rgba(255, 255, 255, 0.3), 
+						inset 0 -15px 20px -10px rgba(0, 0, 0, 0.15);
+						
+	box-shadow: 		0 4px 2px -2px rgba(0, 0, 0, 0.2), 
+						inset 0 25px 20px -10px rgba(255, 255, 255, 0.3), 
+						inset 0 -15px 20px -10px rgba(0, 0, 0, 0.15);	
+}
+
+.action:hover, .caution:hover, .proceed:hover {		
+	-webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.35), 
+						inset 0 20px 20px -10px rgba(0, 0, 0, 0.15), 
+						inset 0 -15px 20px -10px rgba(255, 255, 255, 0.3);
+						
+	-moz-box-shadow: 	0 1px 2px rgba(0, 0, 0, 0.35), 
+						inset 0 20px 20px -10px rgba(0, 0, 0, 0.15), 
+						inset 0 -15px 20px -10px rgba(255, 255, 255, 0.3);
+						
+	box-shadow: 		0 1px 2px rgba(0, 0, 0, 0.35), 
+						inset 0 20px 20px -10px rgba(0, 0, 0, 0.15), 
+						inset 0 -15px 20px -10px rgba(255, 255, 255, 0.3);
+	
+	-webkit-transition: all 0.1s linear;
+	-moz-transition: all 0.1s linear;
+	-ms-transition: all 0.1s linear;
+	-o-transition: all 0.1s linear;
+	transition: all 0.1s linear;
+}
+
+.action {	
+	border: 1px solid #0a72aa;
+	border-top: 1px solid #169abb;
+	background: #1eafd3;
+}
+
+.caution {
+	border: 1px solid #680d0d;
+	border-top: 1px solid #ad1a1a;
+	background: #c12c2c;
+}
+
+.proceed {
+	border: 1px solid #12520b;
+	border-top: 1px solid #207e17;
+	background: #29911f;
+}
+
+.sortableregion 
+{
+    width: 100%;
+    height:100%;
+	padding-left: 5px;
+}
+.deleteme
+{
+width: 15px;
+height: 15px;
+background: #b6341a;
+display: block;
+top: 0;
+left: 0;
+float: left;
+color: #fff;
+line-height: 15px;
+font-size: 11px;
+}
+.deletemeright
+{
+width: 15px;
+height: 15px;
+background: #b6341a;
+display: block;
+top: 0;
+left: 0;
+float: right;
+color: #fff;
+line-height: 15px;
+font-size: 11px;
+text-align: center;
+}
+.deleteme:hover, .deletemeright:hover
+{
+    cursor:pointer;
+    font-weight: bold;
+}
+.ui-state-hover 
+{ 
+    border: 3px solid #4ECDC4; 
+}
+
+pre#output {
+	margin: 1%;
+}
+
