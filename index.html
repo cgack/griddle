@@ -1,0 +1,75 @@
+<!doctype html>
+<html>
+<head>
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.8.23/themes/base/jquery-ui.css" />
+<link rel="stylesheet" href="griddle.css" />
+<link rel="stylesheet" type='text/css' href="style.css">
+    <link rel='stylesheet' type='text/css' href='http://fonts.googleapis.com/css?family=Open+Sans:400,700|Vollkorn'>
+<script src="http://code.jquery.com/jquery.js"></script>
+<script src="http://code.jquery.com/ui/1.8.23/jquery-ui.js"></script>
+<script src="griddle.js"></script>
+<link href="prettify.css" type="text/css" rel="stylesheet" />
+<script type="text/javascript" src="prettify.js"></script>
+</head>
+<body onload="prettyPrint();">
+<h1 class="h1">Griddle</h1>
+   <div class="griddleContainer" id="griddleContainer100">
+        <span class="uxGriddleMessage infoMessage"></span>
+        <div class="griddleTopControls container_12 clearfix">
+            <div class="grid_12">
+                <button class="button addItem">Add Item</button>                
+            </div>
+            <br />
+            <br />
+            <br />
+        </div>
+        <div class="griddle clearfix">
+            <div class="container_12 passiveGrid">
+                <div class="grid_1">
+                </div>
+                <div class="grid_1">
+                </div>
+                <div class="grid_1">
+                </div>
+                <div class="grid_1">
+                </div>
+                <div class="grid_1">
+                </div>
+                <div class="grid_1">
+                </div>
+                <div class="grid_1">
+                </div>
+                <div class="grid_1">
+                </div>
+                <div class="grid_1">
+                </div>
+                <div class="grid_1">
+                </div>
+                <div class="grid_1">
+                </div>
+                <div class="grid_1">
+                </div>
+                <div class="sizeRef" style="">
+                </div>
+            </div>
+            <div class="container_12 passGrid">
+            	<div class="grid_12 r1"></div>
+            </div>
+            <div class="container_12 activeGrid ui-droppable">
+            </div>
+        </div>
+        <div class="griddleBottomControls container_12">
+            <div class="grid_12">
+                <button class="button addRow appendRow" title="Add a row to the grid">
+                    Add A Row</button>
+                    <!--
+                <button class="button proceed uxContentSave" title="click to save the current configuration">
+                    Save Layout</button> -->
+            </div>
+        </div>
+        <div style="clear: both;"></div>
+        <h2>Current Markup</h2>
+				<pre class="prettyprint" id="output" ></pre>
+    </div>
+</body>
+</html>
