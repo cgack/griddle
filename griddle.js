@@ -320,12 +320,10 @@ var griddle = {
 								isContainer = false,
 								isContained = movArr[i].hasClass("contained");
 						if (!isContained) {
-							console.log(movArr[i].attr("id"));
 							if (movArr[i].hasClass("contentregion")) {
-								console.log("iscontainer");
 								$data.ciid = 0;
 								$data.ciid += "^" + movArr[i].attr("id");
-								isContainer = true;								
+								isContainer = true;
 							}
 							if (nxtCol > -1 && nxtCol === itmCol && itmRow === nxtRow) {
 									for (var k = 0, kk = movArr.length; k < kk; k++) {
