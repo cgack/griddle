@@ -1,7 +1,6 @@
 /***********************************
 *
 *  Griddle
-*  Copyright Healthx 2012, MIT License http://healthx.mit-license.org
 *
 ***********************************/
 
@@ -72,7 +71,24 @@ var griddle = {
 														return false;
 												});
 
-						if (loc >= 100) {
+						if (nm.indexOf("ContentItemContainer") > -1 && loc == location) {
+								var region = "region" + nm.split("ContentItemContainer")[1];
+								$itm = $("<div class='contentregion " + region + "' id='" + nm + "' ><div class='sortableregion'></div></div>")
+												.moveable({
+														handles: "e, s, se",
+														isDroppable: true,
+														ciLocation: location
+												})
+												.data("gridClass", parseInt(className, 10))
+												.width("100%");
+								$del.addClass("deletemeright").removeClass("deleteme");
+								$itm.prepend($del);
+								$("<div class='" + gridClass + "' ></div>")
+										.append($itm)
+										.appendTo(griddleSelector + ".activeGrid");
+
+						// Content items contained within content item regions have location = 100, 200, etc
+						} else if (loc >= 100) {
 								$tgt = $(griddleSelector + ".region" + loc);
 								$("<div class='moveable' id='" + regid + "' >" + nm + "</div>")
 												.moveable({ ciLocation: location })
@@ -91,15 +107,33 @@ var griddle = {
 
 
 				}
-
+				//This is to pad an extra row to the griddle when we add one.
 				var rows = Math.floor(gridColumns / 12) + (gridColumns % 12 > 0 ? 1 : 0);
 				rows = isNaN(rows) ? 1 : rows;
 				griddleRows = rows;
 				for (var i = 0; i < rows; i++) {
 						var rw = i === rows ? "<div class='grid_12 r" + (i + 1) + "'><span class='addme'>+</span></div>" : "<div class='grid_12 r" + (i + 1) + "'></div>";
-
+						//$(griddleSelector + ".passGrid").append(rw);
 				}
 
+				//Update the height of rows dependent on their children
+				$(griddleSelector + ".contentregion").each(function () {
+						var $tgt = $(this), childs, childsH = 0, rowId, rowH;
+						childs = $tgt.children().children(".moveable");
+						childs.each(function () {
+								childsH += $(this).height() + ($(this).height() * 0.01);
+						});
+						childsH += 15;
+						$tgt.css("height", childsH + "px");
+						rowId = griddle.getRowId($tgt.offset().top, location);
+						rowH = $(".r" + rowId).height();
+						if (rowH < childsH) {
+								$(".r" + rowId).css("height", childsH + "px");
+						}
+				});
+
+				//Since these puppies are loaded into here relative to their container at 100%
+				//we need to get them to behave a little better on the resize event
 				$(griddleSelector + ".moveable").each(function () {
 						var $el = $(this),
 								$data = $el.data(),
@@ -110,6 +144,13 @@ var griddle = {
 
 				});
 
+				$(griddleSelector + '.uxContentSave').unbind('click');
+				$(griddleSelector + '.uxContentSave')
+						.attr("title", "click to save the current configuration")
+						.click($.proxy(function () {
+								griddle.validateLayout(false , location);
+								return false;
+						}, $.widget("ui.combobox")));
 				$(griddleSelector + '.appendRow').unbind('click');
 				$(griddleSelector + '.appendRow')
 				.attr("title", "Add a row to the grid")
@@ -118,7 +159,66 @@ var griddle = {
 						$(griddleSelector + ".passGrid").append("<div class='grid_12 r" + griddleRows + "'></div>");
 						return false;
 				});
-				
+				$(griddleSelector + '.appendContainer').unbind('click');
+				$(griddleSelector + '.appendContainer')
+								.attr("title", "Add a Content Region to the Grid")
+								.click(function (e) {
+										var mx = 0,
+												cnt,
+												$itm;
+									
+										$(griddleSelector + ".contentregion").each(function () {
+												var pattern = /[0-9]*$/;
+												var idx = parseInt($(this).attr("id").match(pattern), 10);
+												mx = mx < idx ? idx : mx;
+										});
+										
+										cnt = mx + 100;
+										$itm = $("<div class='contentregion region" + cnt + "' id='ContentItemContainer" + cnt + "' ><span class='sortableinfo'>Drag any Item onto this region</span><div class='sortableregion'></div></div>")
+																.moveable({
+																		handles: "e, s, se",
+																		isDroppable: true,
+																		ciLocation: location
+																})
+																.css("margin-left", "1%")
+																.prependTo(griddleSelector + ".activeGrid");
+										griddle.validateLayout(false, "100");
+
+										var $del = $("<span class='deletemeright'>X</span>")
+																		.bind("click", function () {
+																				var url = "",
+																						data = { registryid: $(this).parent().data("regid") },
+																						conf = window.confirm("Are you sure you wish to delete this item?"),
+																						moveables = $(this).parent().children(".sortableregion").children(".moveable");
+																				if (conf) {
+																						if (moveables.length) {
+																								moveables.each(function () {
+																										if ($(this).data("regid")) {
+																												data = { registryid: $(this).data("regid") };
+																										} else {
+																												$(this).remove();
+																										}
+																								});
+																						}
+																						if ($(this).parent().data("regid")) {
+																								data = { registryid: $(this).parent().data("regid") };
+																								
+																						} else {
+																								$(this).parent().remove();
+																								griddle.setMessage("info", "Content Item Removed", location);
+																						}
+
+																				}
+																				return false;
+																		});
+
+
+						$itm.prepend($del);
+
+						griddleRows++;
+						$(griddleSelector + ".passGrid").append("<div class='grid_12 r" + griddleRows + "'></div>");
+						return false;
+				});
 		},
 		getRowId: function (t, location) {
 				var griddleSelector = '#griddleContainer' + location + ' ';
@@ -170,16 +270,17 @@ var griddle = {
 						$(griddleSelector + ".uxGriddleMessage").html("").show();
 				}
 		},
-		validateLayout: function () {
-				var location = "100",
-					griddleSelector = '#griddleContainer' + location + ' ',
-					movArr = [],
-					currRow = 0,
-					contRow = 0,
-					colCnt = 0;
+		validateLayout: function (isUpdating, location) {
+				
+				var griddleSelector = '#griddleContainer' + location + ' ';
 
+				var movArr = [],
+				currRow = 0,
+				contRow = 0,
+				colCnt = 0;
 				griddle.setMessage("clear", "", location);
-				$(griddleSelector + ".moveable" ).each($.proxy(function (index, element) {
+				$(griddleSelector + ".moveable," + griddleSelector + ".contentregion").each($.proxy(function (index, element) {
+				
 						$this = $(element);
 						$data = $(element).data();
 						var leftPct = (($this.offset().left - $(griddleSelector + ".activeGrid").offset().left) / $(griddleSelector + ".activeGrid").width()) * 100;
@@ -187,12 +288,13 @@ var griddle = {
 						$data.rowId = griddle.getRowId($this.offset().top, location);
 						movArr.push($this);
 						if ($data.startCol === -1) {
-								var msg = "Oops, there was something wrong with that move. Please check alignments and try again.";
+				
+								var msg = isUpdating ? "Update failed. Please check alignments and try again" : "Oops, there was something wrong with that move. Please check alignments and try again.";
 								griddle.setMessage("error", msg, location);
 								return false;
 						}
 				}, this));
-				console.log(movArr);
+				
 				movArr.sort(function (a, b) {
 						//0 if eq , -1 if b > a, 1 if b < a
 						var result = 0;
@@ -215,40 +317,60 @@ var griddle = {
 								nxtRow = (movArr[i + 1] != null) ? movArr[i + 1].data("rowId") : -1,
 								nxtCol = (movArr[i + 1] != null) ? movArr[i + 1].data("startCol") : -1,
 								$data = movArr[i].data(),
-								isContainer = false;
-						
-						
-						if (nxtCol > -1 && nxtCol === itmCol && itmRow === nxtRow) {
-								for (var k = 0, kk = movArr.length; k < kk; k++) {
-										if (movArr[k].data("startCol") > itmCol) {
-												nxtCol = movArr[k].data("startCol");
-												break;
-										}
-								}
-						}
-						$data.suffix = $data.prefix = $data.alpha = undefined;
-						if (currRow !== itmRow ) {
-								
-							currRow = itmRow;
-							contRow = isContainer ? itmRow : contRow;
-							colCnt = 0;
-							//First
-							$data.alpha = true;
-							if (itmCol !== 1) {
-									$data.prefix = itmCol - 1;
+								isContainer = false,
+								isContained = movArr[i].hasClass("contained");
+						if (!isContained) {
+							console.log(movArr[i].attr("id"));
+							if (movArr[i].hasClass("contentregion")) {
+								console.log("iscontainer");
+								$data.ciid = 0;
+								$data.ciid += "^" + movArr[i].attr("id");
+								isContainer = true;								
 							}
-							if (nxtRow === itmRow && nxtCol !== itmCol) {
-									$data.suffix = nxtCol - (itmSz + itmCol);
+							if (nxtCol > -1 && nxtCol === itmCol && itmRow === nxtRow) {
+									for (var k = 0, kk = movArr.length; k < kk; k++) {
+											if (movArr[k].data("startCol") > itmCol) {
+													nxtCol = movArr[k].data("startCol");
+													break;
+											}
+									}
 							}
-					
-						} else {
-								if (nxtRow === itmRow && nxtCol !== itmCol) {
-										$data.suffix = nxtCol - (itmSz + itmCol);
-								} else {
-										$data.suffix = 0; //reset
-								}
-						}
-
+							$data.suffix = $data.prefix = $data.alpha = undefined;
+							if (currRow !== itmRow || (isContainer && contRow !== itmRow)) {
+									if (isContainer && currRow === itmRow) {
+											if (colCnt === 0) {
+													//First
+													$data.alpha = true;
+													if (itmCol !== 1) {
+															$data.prefix = itmCol - 1;
+													}
+											}
+											if (nxtRow === itmRow && nxtCol !== itmCol) {
+													$data.suffix = nxtCol - (itmSz + itmCol);
+											} else {
+													$data.suffix = 0; //reset
+											}
+									} else {
+											currRow = itmRow;
+											contRow = isContainer ? itmRow : contRow;
+											colCnt = 0;
+											//First
+											$data.alpha = true;
+											if (itmCol !== 1) {
+													$data.prefix = itmCol - 1;
+											}
+											if (nxtRow === itmRow && nxtCol !== itmCol) {
+													$data.suffix = nxtCol - (itmSz + itmCol);
+											}
+									}
+							} else {
+									if (nxtRow === itmRow && nxtCol !== itmCol) {
+											$data.suffix = nxtCol - (itmSz + itmCol);
+									} else {
+											$data.suffix = 0; //reset
+									}
+							}
+						
 						if (!$data.locationId) {
 								colCnt = colCnt + itmSz;
 								colCnt += ($data.suffix != undefined) ? $data.suffix : 0;
@@ -269,17 +391,33 @@ var griddle = {
 								gridClassName += " alpha";
 						}
 
-						outputDivs += "<div class='" + gridClassName + "'></div>\n";
-				
+						if (isContainer) {
+							gridClassName += " container";
+							var childItems = "";
+							var childs = movArr[i].find(".contained").each(function() {
+								childItems += "\n\t<div class='contained'></div>\n";
+							});
 
-						if ($data.suffix < 0 || $data.prefix < 0) {
-							griddle.setMessage("error", "Oops, there was something wrong with that move. Please check alignments and try again.", location);
+							outputDivs += "<div class='" + gridClassName + "'>" + childItems + "</div>\n";
 						} else {
+							outputDivs += "<div class='" + gridClassName + "'></div>\n";
+						}
+					
+					} else {
+					
+						movArr[i].closest(".contentregion");
+					}
+
+						
+					if ($data.suffix < 0 || $data.prefix < 0) {
+							griddle.setMessage("error", "Oops, there was something wrong with that move. Please check alignments and try again.", location);
+					} else {
 							movArr.splice(0, 1);
 							if (movArr.length > 0) {
-								updateSpec(movArr);
+									updateSpec(movArr);
 							}
-						}
+					}
+				
 				};
 				if (movArr.length > 0) {
 						updateSpec(movArr);
@@ -365,7 +503,7 @@ $.widget("hx.moveable", {
             grid: [1, 55],
             stop: function (e, u) {
                 griddle.setMessage("clear", "", self.options.ciLocation);
-                griddle.validateLayout();
+                griddle.validateLayout(false, "100");
             }
         })
         .resizable({
@@ -390,7 +528,7 @@ $.widget("hx.moveable", {
                         childsH = 0,
                         rowId = -1,
                         locId = self.options.ciLocation;
-                    cln.css("left", "0").css("top", "0").css("position", "relative").width("94%");
+                    cln.css("left", "0").css("top", "0").css("position", "relative").width("94%").addClass("contained");
                     locId = $tgt.attr("id").split("ContentItemContainer")[1];
 
                     cln.data("locationId", locId);
@@ -408,6 +546,8 @@ $.widget("hx.moveable", {
                     $tgt.css("height", childsH + "px");
                     rowId = griddle.getRowId($tgt.offset().top, locId);
                     $(".r" + rowId).css("height", childsH + "px");
+
+                    griddle.validateLayout(false, "100");
 
                 }
             });
@@ -472,7 +612,7 @@ $.widget("hx.moveable", {
                 self.size.height = os.height + oy;
                 //set children of content regions to the correct width!
                 $(this).children(".sortableregion").children(".moveable").width("96%");
-                griddle.validateLayout();
+                griddle.validateLayout(false, "100");
 
             }
 
@@ -513,7 +653,7 @@ $.widget.bridge("moveable", $.hx.moveable);
 
             griddleRows++;
             $(".passGrid").append("<div class='grid_12 r" + griddleRows + "'></div>");
-            griddle.validateLayout();
+            griddle.validateLayout(false, "100");
         });
 
 
